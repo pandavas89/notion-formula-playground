@@ -31,10 +31,10 @@ class PlaygroundHome extends ConsumerWidget {
       appBar: AppBar(
         title: const Text('Notion Formula Playground'),
       ),
-      body: Row(
+      body: const Row(
         children: [
           // 왼쪽 영역 - 속성 테이블
-          const Expanded(
+          Expanded(
             flex: 1,
             child: Padding(
               padding: EdgeInsets.all(16.0),
@@ -45,12 +45,9 @@ class PlaygroundHome extends ConsumerWidget {
           Expanded(
             flex: 2,
             child: Padding(
-              padding: const EdgeInsets.all(16.0),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  FormulaInputScreen(),
-                ],
+              padding: EdgeInsets.all(16.0),
+              child: Expanded(
+                child: FormulaInputScreen(),
               ),
             ),
           ),

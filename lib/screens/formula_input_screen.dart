@@ -4,6 +4,7 @@ import 'package:url_launcher/url_launcher.dart';
 
 import '../providers/formula_provider.dart';
 import '../components/formula_item.dart';
+import '../services/formula_evaluator.dart';
 
 class FormulaInputScreen extends ConsumerStatefulWidget {
   const FormulaInputScreen({super.key});
@@ -38,7 +39,7 @@ class _FormulaInputScreenState extends ConsumerState<FormulaInputScreen> {
     }
   }
 
-  void insertFormula(String targetFormula) {
+  void insertFormula(String targetFormula, [bool isFunction = false]) {
     focusNode.requestFocus();
 
     final selection = controller.selection;
@@ -52,7 +53,7 @@ class _FormulaInputScreenState extends ConsumerState<FormulaInputScreen> {
     controller.value = TextEditingValue(
       text: newText,
       selection: TextSelection.collapsed(
-        offset: selection.start + targetFormula.length,
+        offset: selection.start + targetFormula.length + (isFunction ? -1 : 0),
       ),
     );
 
@@ -90,7 +91,7 @@ class _FormulaInputScreenState extends ConsumerState<FormulaInputScreen> {
                 ),
               ),
               onPressed: () {
-                // 저장 로직
+                print(evaluate(ref.read(formulaProvider)));
               },
               child: const Text("저장"),
             ),
@@ -116,35 +117,77 @@ class _FormulaInputScreenState extends ConsumerState<FormulaInputScreen> {
             ),
           ),
         ),
-        Row(
-          children: [
-            Expanded(
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  const FormulaHeader(name: "속성"),
-                  const FormulaHeader(name: "빌트인"),
-                  FormulaItem(
-                    name: "not",
-                    icon: Icons.check_box_outlined,
-                    onInsert: () => insertFormula("not"),
+        const SizedBox(height: 10),
+        Expanded(
+          child: Row(
+            children: [
+              Expanded(
+                child: SingleChildScrollView(
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      const FormulaHeader(name: "속성"),
+                      const FormulaHeader(name: "빌트인"),
+                      FormulaItem(
+                          name: "not",
+                          icon: Icons.check_box_outlined,
+                          onInsert: () => insertFormula("not")),
+                      FormulaItem(
+                          name: "true",
+                          icon: Icons.check_box_outlined,
+                          onInsert: () => insertFormula("true")),
+                      FormulaItem(
+                          name: "false",
+                          icon: Icons.check_box_outlined,
+                          onInsert: () => insertFormula("false")),
+                      const FormulaHeader(name: "함수"),
+                      FormulaItem(
+                          name: "if ()",
+                          icon: Icons.functions,
+                          onInsert: () => insertFormula("if()", true)),
+                      FormulaItem(
+                          name: "ifs ()",
+                          icon: Icons.functions,
+                          onInsert: () => insertFormula("ifs()", true)),
+                      FormulaItem(
+                          name: "and()",
+                          icon: Icons.check_box_outlined,
+                          onInsert: () => insertFormula("and()", true)),
+                      FormulaItem(
+                          name: "or()",
+                          icon: Icons.check_box_outlined,
+                          onInsert: () => insertFormula("or()", true)),
+                      FormulaItem(
+                          name: "not()",
+                          icon: Icons.check_box_outlined,
+                          onInsert: () => insertFormula("not()", true)),
+                      FormulaItem(
+                          name: "empty()",
+                          icon: Icons.check_box_outlined,
+                          onInsert: () => insertFormula("empty()", true)),
+                      FormulaItem(
+                          name: "length()",
+                          icon: Icons.numbers,
+                          onInsert: () => insertFormula("length()", true)),
+                      FormulaItem(
+                          name: "substring()",
+                          icon: Icons.subject,
+                          onInsert: () => insertFormula("substring()", true)),
+                      FormulaItem(
+                          name: "contains()",
+                          icon: Icons.check_box_outlined,
+                          onInsert: () => insertFormula("contains()", true)),
+                      FormulaItem(
+                          name: "test()",
+                          icon: Icons.check_box_outlined,
+                          onInsert: () => insertFormula("test()", true)),
+                    ],
                   ),
-                  FormulaItem(
-                    name: "true",
-                    icon: Icons.check_box_outlined,
-                    onInsert: () => insertFormula("true"),
-                  ),
-                  FormulaItem(
-                    name: "false",
-                    icon: Icons.check_box_outlined,
-                    onInsert: () => insertFormula("false"),
-                  ),
-                  const FormulaHeader(name: "함수"),
-                ],
+                ),
               ),
-            ),
-            const Expanded(child: Column(children: [])),
-          ],
+              const Expanded(child: Column(children: [])),
+            ],
+          ),
         ),
       ],
     );
