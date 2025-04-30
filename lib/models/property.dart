@@ -1,5 +1,3 @@
-// Property 모델 정의
-
 enum PropertyType {
   text,
   number,
@@ -8,13 +6,13 @@ enum PropertyType {
 }
 
 class Property {
-  String name;
-  PropertyType type;
-  dynamic value;
+  final String name;
+  final PropertyType type;
+  final bool isFormula; // 수식 컬럼 여부
 
   Property({
     required this.name,
     required this.type,
-    this.value,
+    this.isFormula = false,
   });
 }

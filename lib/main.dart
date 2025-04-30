@@ -31,32 +31,25 @@ class PlaygroundHome extends ConsumerWidget {
       appBar: AppBar(
         title: const Text('Notion Formula Playground'),
       ),
-      body: const Row(
+      body: Row(
         children: [
           // 왼쪽 영역 - 속성 테이블
-          Expanded(
+          const Expanded(
             flex: 1,
             child: Padding(
               padding: EdgeInsets.all(16.0),
-              child: ColumnTableScreen(showAppBar: false),
+              child: ColumnTableScreen(),
             ),
           ),
           // 오른쪽 영역 - 수식 입력 + 디버깅 결과
           Expanded(
             flex: 2,
             child: Padding(
-              padding: EdgeInsets.all(16.0),
+              padding: const EdgeInsets.all(16.0),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Text('수식 입력',
-                      style:
-                          TextStyle(fontSize: 18, fontWeight: FontWeight.bold)),
-                  SizedBox(height: 8),
                   FormulaInputScreen(),
-                  SizedBox(height: 16),
-                  Text('디버깅 결과 (추후 추가)', style: TextStyle(fontSize: 16)),
-                  // 여기에 디버깅 결과 화면 추가할 예정
                 ],
               ),
             ),
