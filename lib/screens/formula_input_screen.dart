@@ -181,6 +181,38 @@ class _FormulaInputScreenState extends ConsumerState<FormulaInputScreen> {
                           name: "test()",
                           icon: Icons.check_box_outlined,
                           onInsert: () => insertFormula("test()", true)),
+                      FormulaItem(
+                          name: "match()",
+                          icon: Icons.subject,
+                          onInsert: () => insertFormula("match()", true)),
+                      FormulaItem(
+                          name: "replace()",
+                          icon: Icons.subject,
+                          onInsert: () => insertFormula("replace()", true)),
+                      FormulaItem(
+                          name: "replaceAll()",
+                          icon: Icons.subject,
+                          onInsert: () => insertFormula("replaceAll()", true)),
+                      FormulaItem(
+                          name: "lower()",
+                          icon: Icons.subject,
+                          onInsert: () => insertFormula("lower()", true)),
+                      FormulaItem(
+                          name: "upper()",
+                          icon: Icons.subject,
+                          onInsert: () => insertFormula("upper()", true)),
+                      FormulaItem(
+                          name: "repeat()",
+                          icon: Icons.subject,
+                          onInsert: () => insertFormula("repeat()", true)),
+                          FormulaItem(
+                          name: "padStart()",
+                          icon: Icons.subject,
+                          onInsert: () => insertFormula("padStart()", true)),
+                      FormulaItem(
+                          name: "padEnd()",
+                          icon: Icons.subject,
+                          onInsert: () => insertFormula("padEnd()", true)), 
                     ],
                   ),
                 ),
