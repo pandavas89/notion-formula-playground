@@ -53,7 +53,7 @@ class _FormulaInputScreenState extends ConsumerState<FormulaInputScreen> {
     controller.value = TextEditingValue(
       text: newText,
       selection: TextSelection.collapsed(
-        offset: selection.start + targetFormula.length + (isFunction ? -1 : 0),
+        offset: start + targetFormula.length + (isFunction ? -1 : 0),
       ),
     );
 
@@ -205,14 +205,14 @@ class _FormulaInputScreenState extends ConsumerState<FormulaInputScreen> {
                           name: "repeat()",
                           icon: Icons.subject,
                           onInsert: () => insertFormula("repeat()", true)),
-                          FormulaItem(
+                      FormulaItem(
                           name: "padStart()",
                           icon: Icons.subject,
                           onInsert: () => insertFormula("padStart()", true)),
                       FormulaItem(
                           name: "padEnd()",
                           icon: Icons.subject,
-                          onInsert: () => insertFormula("padEnd()", true)), 
+                          onInsert: () => insertFormula("padEnd()", true)),
                     ],
                   ),
                 ),
