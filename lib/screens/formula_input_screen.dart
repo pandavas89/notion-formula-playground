@@ -4,6 +4,7 @@ import 'package:url_launcher/url_launcher.dart';
 
 import '../providers/formula_provider.dart';
 import '../components/formula_item.dart';
+import '../components/formula_editor.dart';
 import '../services/formula_evaluator.dart';
 
 class FormulaInputScreen extends ConsumerStatefulWidget {
@@ -105,17 +106,10 @@ class _FormulaInputScreenState extends ConsumerState<FormulaInputScreen> {
             border: Border.all(color: Colors.grey.shade300),
             borderRadius: BorderRadius.circular(8),
           ),
-          child: TextField(
-            focusNode: focusNode,
-            controller: controller,
-            onChanged: (value) =>
-                ref.read(formulaProvider.notifier).state = value,
-            maxLines: null,
-            style: const TextStyle(fontFamily: 'Courier', fontSize: 14),
-            decoration: const InputDecoration.collapsed(
-              hintText: '사용자의 수식',
-            ),
-          ),
+          child: FormulaEditor(
+              initialValue: ref.watch(formulaProvider),
+              onChanged: (value) =>
+                  ref.read(formulaProvider.notifier).state = value),
         ),
         const SizedBox(height: 10),
         Expanded(
